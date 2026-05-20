@@ -379,18 +379,7 @@ main{max-width:900px;margin:0 auto;padding:24px 16px}
 // Load exam data
 const EXAM_DATA = JSON.parse(document.getElementById('exam-data').textContent);
 
-// RECONCILE: Override q.answer with session answers block (answers block = marking scheme)
-// q.answer was set by PDF parser and may be wrong; the answers{} block is the authority
-EXAM_DATA.forEach(session => {
-  if (session.answers && Object.keys(session.answers).length > 0) {
-    session.questions.forEach(q => {
-      const key = String(q.num);
-      if (session.answers[key]) {
-        q.answer = session.answers[key];
-      }
-    });
-  }
-});
+// answers block intentionally not used — q.answer is already corrected from PDF
 
 // State
 let state = {
